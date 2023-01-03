@@ -16,7 +16,7 @@
 const SHOW_SECONDS = false;
 
 // display hours per days target time
-const SHOW_TARGET = true;
+const SHOW_TARGET = false;
 const TARGET_HOURS = 25;
 const TARGET_DAYS = 7;
 
