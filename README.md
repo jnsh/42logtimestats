@@ -2,6 +2,8 @@
 
 Browser extension that displays logtime statistics in [profile.intra.42.fr](https://profile.intra.42.fr).
 
+![A screenshot of the extension](https://raw.githubusercontent.com/jnsh/42logtimestats/main/screenshot.png)
+
 ## Supported browsers
 
 Currently only Chrome 108 has been tested.
