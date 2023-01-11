@@ -54,6 +54,11 @@ function updateTimes()
 	var timeMs = 0;
 	var actDays = 0;
 	totalDays = 0;
+	timeTotal = 0;
+	timeAvgDay = 0;
+	timeAvgActDay = 0;
+	timeAvgWeek = 0;
+	timeTarget = 0;
 
 	var end = new Date(endDate + "T00:00:00.0000");
 	var d = new Date(startDate + "T00:00:00.0000");
@@ -273,11 +278,6 @@ async function getData(url) {
 async function main() {
 	startDate = 0;
 	endDate = 0;
-	timeTotal = 0;
-	timeAvgDay = 0;
-	timeAvgActDay = 0;
-	timeAvgWeek = 0;
-	timeTarget = 0;
 
 	userLocations = document.getElementById("user-locations");
 	data = await getData(userLocations.getAttribute('data-url'));
