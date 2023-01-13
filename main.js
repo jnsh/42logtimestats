@@ -136,6 +136,7 @@ function createStats()
 	dateRangeStart.id = "logtimeDateRangeStart";
 	dateRangeStart.value = startDate;
 	dateRangeStart.min = firstDay;
+	dateRangeStart.max = lastDay;
 	dateRangeStart.onchange = () => {
 		startDate = dateRangeStart.value;
 		if (new Date(startDate + "T00:00:00.0000") > new Date(endDate + "T00:00:00.0000"))
@@ -284,7 +285,7 @@ async function main() {
 
 	var dataLen = Object.keys(data).length;
 	firstDay = Object.keys(data)[dataLen - 1];
-	//lastDay = Object.keys(data)[0];
+	lastDay = Object.keys(data)[0];
 	startDate = firstDay;
 	endDate = dateString(new Date());
 
