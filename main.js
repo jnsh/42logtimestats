@@ -89,7 +89,7 @@ function updateTimes()
 
 function createStats()
 {
-	var logTimeTitle = userLocations.parentElement.firstElementChild;
+	var logTimeTitle = userLocations.parentElement.parentElement.firstElementChild;
 
 	var pullRightSpan = document.createElement("span");
 	pullRightSpan.className = "pull-right";
