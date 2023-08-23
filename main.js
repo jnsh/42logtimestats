@@ -270,27 +270,29 @@ function updateStats()
 	}
 }
 
-async function getData(url) {
-    let response = await fetch(url);
-    let data = await response.json();
-    return data;
-}
-
-async function main() {
+function main() {
 	startDate = 0;
 	endDate = 0;
 
 	userLocations = document.getElementById("user-locations");
-	data = await getData(userLocations.getAttribute('data-url'));
 
-	var dataLen = Object.keys(data).length;
-	firstDay = Object.keys(data)[dataLen - 1];
-	lastDay = Object.keys(data)[0];
-	startDate = firstDay;
-	endDate = dateString(new Date());
+	let url = userLocations.getAttribute('data-url');
+	let xhr = new XMLHttpRequest();
+	xhr.open('GET', url, true);
+	xhr.withCredentials = true;
+	xhr.responseType = "json";
+	xhr.send();
+	xhr.onload = () => {
+		data = xhr.response;
+		var dataLen = Object.keys(data).length;
+		firstDay = Object.keys(data)[dataLen - 1];
+		lastDay = Object.keys(data)[0];
+		startDate = firstDay;
+		endDate = dateString(new Date());
 
-	createStats();
-	updateStats();
+		createStats();
+		updateStats();
+	};
 }
 
 main();
