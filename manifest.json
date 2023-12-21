@@ -1,13 +1,12 @@
 {
-	"manifest_version": 3,
-	"version": "1.0",
-	"name": "42 intra logtime stats",
-	"content_scripts": [
-		{
-			"matches": ["https://profile.intra.42.fr/"],
-			"js": ["main.js"],
-			"css": ["style.css"]
-		}
-	]
+  "manifest_version": 3,
+  "version": "1.0",
+  "name": "42 intra logtime stats",
+  "content_scripts": [
+    {
+      "matches": ["https://profile.intra.42.fr/"],
+      "js": ["main.js"],
+      "css": ["style.css"]
+    }
+  ]
 }
-  
