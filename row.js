@@ -1,7 +1,9 @@
 "use strict";
 
-function TimeRow(label)
-{
+if(logTimeStats === undefined)
+  var logTimeStats = {};
+
+logTimeStats.TimeRow = function(label) {
   this.label = label;
   this.value = null;
   this.valueDiv = document.createElement("div");
@@ -31,29 +33,27 @@ function TimeRow(label)
    if (!this.value || !Number.isFinite(this.value))
       return "-";
 
-    const timeArray = msToTime(this.value);
+    const timeArray = logTimeStats.msToTime(this.value);
     return timeArray[0] + 'h ' + String(timeArray[1]).padStart(2, '0') + 'min';
   };
 };
 
-function createRows()
-{
-  rows[0] = new TimeRow("Total");
-  rows[0].updateValue = () => {return (times.timeTotalMs)};
-  rows[1] = new TimeRow("Avg/day");
-  rows[1].updateValue = () => {return (times.timeTotalMs / times.totalDays)};
-  rows[2] = new TimeRow("Avg/active day");
-  rows[2].updateValue = () => {return (times.timeTotalMs / times.actDays)};
-  rows[3] = new TimeRow("Avg/week");
-  rows[3].updateValue = () => {return ((times.timeTotalMs / times.totalDays) * 7)};
+logTimeStats.createRows = function() {
+  logTimeStats.rows[0] = new logTimeStats.TimeRow("Total");
+  logTimeStats.rows[0].updateValue = () => {return (logTimeStats.times.timeTotalMs)};
+  logTimeStats.rows[1] = new logTimeStats.TimeRow("Avg/day");
+  logTimeStats.rows[1].updateValue = () => {return (logTimeStats.times.timeTotalMs / logTimeStats.times.totalDays)};
+  logTimeStats.rows[2] = new logTimeStats.TimeRow("Avg/active day");
+  logTimeStats.rows[2].updateValue = () => {return (logTimeStats.times.timeTotalMs / logTimeStats.times.actDays)};
+  logTimeStats.rows[3] = new logTimeStats.TimeRow("Avg/week");
+  logTimeStats.rows[3].updateValue = () => {return ((logTimeStats.times.timeTotalMs / logTimeStats.times.totalDays) * 7)};
 
-  updateRows(rows);
+  logTimeStats.updateRows(logTimeStats.rows);
 
-  return (rows);
+  return (logTimeStats.rows);
 };
 
-function updateRows(rows)
-{
+logTimeStats.updateRows = function(rows) {
   rows.forEach(
     (row) => {
       row.value = row.updateValue();

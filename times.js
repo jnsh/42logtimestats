@@ -1,7 +1,10 @@
 "use strict";
 
+if(logTimeStats === undefined)
+  var logTimeStats = {};
+
 /* Parse login time data from the JSON into more useful variables */
-function Times() {
+logTimeStats.Times = function() {
   this.clear = () => {
     this.firstDay = "";
     this.lastDay = "";
@@ -33,12 +36,12 @@ function Times() {
     if (!this.startDate)
       this.startDate = this.firstDay;
     if (!this.endDate)
-      this.endDate = dateToString(new Date());
+      this.endDate = logTimeStats.dateToString(new Date());
 
     end = new Date(this.endDate + "T00:00:00.0000");
     date = new Date(this.startDate + "T00:00:00.0000");
     while (date.getTime() <= end.getTime()) {
-      dstring = dateToString(date);
+      dstring = logTimeStats.dateToString(date);
       if (data[dstring]) {
         this.actDays++;
         tmpArray = data[dstring].split(':');
@@ -53,8 +56,7 @@ function Times() {
   };
 };
 
-function msToTime(ms)
-{
+logTimeStats.msToTime = function(ms) {
   if (!ms)
     return null;
 
@@ -70,8 +72,7 @@ function msToTime(ms)
 
 // Date.prototype.toISOString() uses UTC timezone
 // which can get messy, so let's do this manually
-function dateToString(date)
-{
+logTimeStats.dateToString = function(date) {
 	let year = date.getFullYear();
 	let month = date.getMonth() + 1;
 	let day = date.getDate();

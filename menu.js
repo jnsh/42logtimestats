@@ -1,8 +1,10 @@
 "use strict";
 
-function StatsButtonContainer()
-{
-  const logTimeTitle = userLocations.parentElement.parentElement.firstElementChild;
+if(logTimeStats === undefined)
+  var logTimeStats = {};
+
+logTimeStats.StatsButtonContainer = function() {
+  const logTimeTitle = logTimeStats.userLocations.parentElement.parentElement.firstElementChild;
 
   // all buttons container
   const pullRightSpan = document.createElement("span");
@@ -17,8 +19,7 @@ function StatsButtonContainer()
   return (dropDownSpan);
 };
 
-function StatsButton()
-{
+logTimeStats.StatsButton = function() {
   const dropDownLink = document.createElement("a");
   dropDownLink.id = "logtimeDropdownMenuLink";
   dropDownLink.classList.add("dropdown-toggle", "btn", "simple-link");
@@ -31,8 +32,7 @@ function StatsButton()
   return (dropDownLink);
 };
 
-function StatsPopup()
-{
+logTimeStats.StatsPopup = function() {
   const dropDown = document.createElement("div");
   dropDown.id = "logtimeDropdownMenu";
   dropDown.classList.add("dropdown-menu", "pull-right");
@@ -41,8 +41,7 @@ function StatsPopup()
   return (dropDown);
 };
 
-function DateRange()
-{
+logTimeStats.DateRange = function() {
   const dateRangeDiv = document.createElement("div");
   dateRangeDiv.className = "logtime-date-form";
 
@@ -61,17 +60,17 @@ function DateRange()
 
   dateRangeStart.type = "date";
   dateRangeStart.id = "logtimeDateRangeStart";
-  dateRangeStart.value = times.startDate;
-  dateRangeStart.min = times.firstDay;
-  dateRangeStart.max = times.lastDay;
+  dateRangeStart.value = logTimeStats.times.startDate;
+  dateRangeStart.min = logTimeStats.times.firstDay;
+  dateRangeStart.max = logTimeStats.times.lastDay;
   dateRangeStart.onchange = () => {
-    times.startDate = dateRangeStart.value;
-    if (new Date(times.startDate + "T00:00:00.0000") > new Date(times.endDate + "T00:00:00.0000"))
+    logTimeStats.times.startDate = dateRangeStart.value;
+    if (new Date(logTimeStats.times.startDate + "T00:00:00.0000") > new Date(logTimeStats.times.endDate + "T00:00:00.0000"))
     {
-      dateRangeEnd.value = times.startDate;
+      dateRangeEnd.value = logTimeStats.times.startDate;
     }
-    times.update(data);
-    updateRows(rows);
+    logTimeStats.times.update(logTimeStats.data);
+    logTimeStats.updateRows(logTimeStats.rows);
   };
   const dateRangeStartLabel = document.createElement("label");
   dateRangeStartLabel.for = "logtimeDateRangeStart";
@@ -81,16 +80,16 @@ function DateRange()
 
   dateRangeEnd.type = "date";
   dateRangeEnd.id = "logtimeDateRangeEnd";
-  dateRangeEnd.value = times.endDate;
-  dateRangeEnd.min = times.firstDay;
+  dateRangeEnd.value = logTimeStats.times.endDate;
+  dateRangeEnd.min = logTimeStats.times.firstDay;
   dateRangeEnd.onchange = () => {
-    times.endDate = dateRangeEnd.value;
-    if (new Date(times.startDate + "T00:00:00.0000") > new Date(times.endDate + "T00:00:00.0000"))
+    logTimeStats.times.endDate = dateRangeEnd.value;
+    if (new Date(logTimeStats.times.startDate + "T00:00:00.0000") > new Date(logTimeStats.times.endDate + "T00:00:00.0000"))
     {
-      dateRangeStart.value = times.endDate;
+      dateRangeStart.value = logTimeStats.times.endDate;
     }
-    times.update(data);
-    updateRows(rows);
+    logTimeStats.times.update(logTimeStats.data);
+    logTimeStats.updateRows(logTimeStats.rows);
   };
   const dateRangeEndLabel = document.createElement("label");
   dateRangeEndLabel.for = "logtimeDateRangeEnd";
@@ -102,16 +101,15 @@ function DateRange()
   return (dateRangeDiv);
 };
 
-function createMenu()
-{
-  const container = StatsButtonContainer();
-  const popup = StatsPopup();
+logTimeStats.createMenu = function() {
+  const container = logTimeStats.StatsButtonContainer();
+  const popup = logTimeStats.StatsPopup();
 
-  container.appendChild(StatsButton());
+  container.appendChild(logTimeStats.StatsButton());
   container.appendChild(popup);
-  popup.appendChild(DateRange());
+  popup.appendChild(logTimeStats.DateRange());
 
-  createRows().forEach(
+  logTimeStats.createRows().forEach(
     (row) => {
       popup.appendChild(row.createNode());
     }

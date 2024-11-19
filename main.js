@@ -1,14 +1,15 @@
 "use strict";
 
-const userLocations = document.getElementById("user-locations");
-const times = new Times(null);
+if(logTimeStats === undefined)
+  var logTimeStats = {};
 
-const rows = [];
-let data = null;
+logTimeStats.userLocations = document.getElementById("user-locations");
+logTimeStats.times = new logTimeStats.Times(null);
+logTimeStats.rows = [];
+logTimeStats.data = null;
 
-function main()
-{
-  const dataUrl = userLocations.getAttribute('data-url');
+logTimeStats.main = function() {
+  const dataUrl = logTimeStats.userLocations.getAttribute('data-url');
 
   const xhr = new XMLHttpRequest();
   xhr.open('GET', dataUrl, true);
@@ -17,11 +18,11 @@ function main()
   xhr.send();
 
   xhr.onload = () => {
-    data = xhr.response;
-    console.log(data);
-    times.update(data);
-    createMenu();
+    logTimeStats.data = xhr.response;
+    console.log(logTimeStats.data);
+    logTimeStats.times.update(logTimeStats.data);
+    logTimeStats.createMenu();
   };
 };
 
-main();
+logTimeStats.main();
