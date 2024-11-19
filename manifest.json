@@ -5,7 +5,7 @@
   "content_scripts": [
     {
       "matches": ["https://profile.intra.42.fr/"],
-      "js": ["main.js"],
+      "js": ["times.js", "row.js", "menu.js", "main.js"],
       "css": ["style.css"]
     }
   ]
