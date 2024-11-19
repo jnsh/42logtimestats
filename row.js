@@ -25,7 +25,6 @@ logTimeStats.TimeRow = function(label) {
   };
 
   this.update = () => {
-    console.log("updatevalue " + this.value);
     this.valueDiv.innerHTML = this.formatTime();
   };
 

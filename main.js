@@ -19,7 +19,6 @@ logTimeStats.main = function() {
 
   xhr.onload = () => {
     logTimeStats.data = xhr.response;
-    console.log(logTimeStats.data);
     logTimeStats.times.update(logTimeStats.data);
     logTimeStats.createMenu();
   };
