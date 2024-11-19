@@ -26,29 +26,26 @@ logTimeStats.Times = function() {
     this.totalDays = 0;
     this.timeTotalMs = 0;
 
-    let tmpArray, end, date, dstring; //FIXME use const if possible
-
-    tmpArray = Object.keys(data);
-    this.lastDay = tmpArray[0];
-    this.firstDay = tmpArray.pop();
-    tmpArray = null;
+    const dataArray = Object.keys(data);
+    this.lastDay = dataArray[0];
+    this.firstDay = dataArray.pop();
 
     if (!this.startDate)
       this.startDate = this.firstDay;
     if (!this.endDate)
       this.endDate = logTimeStats.dateToString(new Date());
 
-    end = new Date(this.endDate + "T00:00:00.0000");
-    date = new Date(this.startDate + "T00:00:00.0000");
+    const end = new Date(this.endDate + "T00:00:00.0000");
+    const date = new Date(this.startDate + "T00:00:00.0000");
+
     while (date.getTime() <= end.getTime()) {
-      dstring = logTimeStats.dateToString(date);
-      if (data[dstring]) {
+      const dateString = logTimeStats.dateToString(date);
+      if (data[dateString]) {
         this.actDays++;
-        tmpArray = data[dstring].split(':');
-        this.timeTotalMs += tmpArray[0] * 60 * 60 * 1000;
-        this.timeTotalMs += tmpArray[1] * 60 * 1000;
-        this.timeTotalMs += tmpArray[2] * 1000;
-        tmpArray = null;
+        const dateArray = data[dateString].split(':');
+        this.timeTotalMs += dateArray[0] * 60 * 60 * 1000;
+        this.timeTotalMs += dateArray[1] * 60 * 1000;
+        this.timeTotalMs += dateArray[2] * 1000;
       }
       this.totalDays++;
       date.setDate(date.getDate() + 1);
