@@ -1,3 +1,7 @@
+**As of 11/2024 this project is archived and won't be developed further.**
+
+At the time of writing, the extension works perfectly on intra v2, but could break due to changes from 42. It does not work on intra v3.
+
 # 42logtimestats
 
 Browser extension that displays logtime statistics in [profile.intra.42.fr](https://profile.intra.42.fr).
